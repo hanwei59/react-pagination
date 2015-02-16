@@ -1,0 +1,33 @@
+{
+  "name": "react-pagination",
+  "version": "1.0.0",
+  "description": "react pagination component",
+  "main": "index.js",
+  "scripts": {
+    "start": "webpack-dev-server --port 3000 --watch --process --color"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hanwei59/react-pagination"
+  },
+  "keywords": [
+    "react",
+    "pagination",
+    "data",
+    "grid"
+  ],
+  "author": "hanwei",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hanwei59/react-pagination/issues"
+  },
+  "homepage": "https://github.com/hanwei59/react-pagination",
+  "dependencies": {
+    "react": "^0.12.2"
+  },
+  "devDependencies": {
+    "jsx-loader": "^0.12.2",
+    "webpack": "^1.5.3",
+    "webpack-dev-server": "^1.7.0"
+  }
+}
