@@ -3,13 +3,22 @@
  * Created by hanwei on 15/2/16.
  */
 var React = require('react');
-var Pagination = require('./pagination');
+var DataGird = require('./src/grid');
+var Pagination = require('./src/pagination');
 
 var App = React.createClass({
   getInitialState : function(){
     return {
+      columns:[
+        {name: '', field: 'applyId', checkbox: true},
+        {name: '申请单编号', field: 'applyId'},
+        {name: '品牌', field: 'applyBrand'},
+        {name: '状态', field: 'verify'},
+        {name: '申请时间', field: 'addTime'}
+      ],
       condition:{},
-      data:[]
+      data:[],
+      checkedList:[]
     }
   },
   callback : function(data,pageInfo){
@@ -49,33 +58,51 @@ var App = React.createClass({
             </div>
           </div>
         </div>
-        <div className="row">
-          <table className="table table-bordered table-striped dataTable">
-            <thead>
-              <tr>
-                <th>申请单编号</th>
-                <th>品牌</th>
-                <th>状态</th>
-                <th>申请时间</th>
-              </tr>
-            </thead>
-            <tbody>
-          {this.state.data.map(function(item){
-            return (
-              <tr key={item.applyId}>
-                <td>{item.applyId}</td>
-                <td>{item.applyBrand}</td>
-                <td>{item.verify}</td>
-                <td>{item.addTime}</td>
-              </tr>
-            );
-          }.bind(this))}
-            </tbody>
-          </table>
-          <Pagination url="./data.js" callback={this.callback} condition={this.state.condition}></Pagination>
-        </div>
+        <DataGird
+          data={this.state.data}
+          columns={this.state.columns}
+          checkedIds={this.state.checkedList}
+          onAllChecked={this._handleDTAllChecked}
+          onOneChecked={this._handleDTOneChecked}/>
+        <Pagination
+          url="./data.js"
+          callback={this.callback}
+          condition={this.state.condition}/>
       </div>
     );
+  },
+  /**
+   * datatable的全选or全不选
+   * @param status
+   * @param ids
+   * @private
+   */
+  _handleDTAllChecked(status, ids) {
+    if(status){
+      this.setState({checkedList:this.state.checkedList.concat(ids)});
+    }else{
+      this.setState({checkedList:[]});
+    }
+  },
+
+  /**
+   * 选中or取消某个datable的checkbox
+   * @param status
+   * @param id
+   * @private
+   */
+  _handleDTOneChecked(status, id) {
+    if(status){
+      this.setState({checkedList:this.state.checkedList.concat([id])});
+    }else{
+      var checkedList = this.state.checkedList;
+      for(var i=0,l=checkedList.length;i<l;i++){
+        if(checkedList[i] == id){
+          checkedList.splice(i,1);
+        }
+      }
+      this.setState({checkedList:checkedList});
+    }
   }
 });
 
