@@ -21,4 +21,4 @@ npm start
 然后打开这个链接看效果 http://localhost:3000/
 服务端是模拟的，请查看ajax调用
 
-mail：hanwei@qianmi.com
+mail：hanwei59@126.com
