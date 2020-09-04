@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/hanwei59/react-pagination",
   "dependencies": {
-    "react": "^0.12.2"
+    "react": "^16.13.1"
   },
   "devDependencies": {
     "jsx-loader": "^0.12.2",
